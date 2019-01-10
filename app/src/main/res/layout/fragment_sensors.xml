@@ -7,30 +7,29 @@
     tools:context=".Fragments.SensorsFragment"
     tools:layout_editor_absoluteY="81dp">
 
-
     <TextView
-        android:id="@+id/sensors_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="@string/sensors_label"
+        android:id="@+id/tvTitleSensors"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:background="@color/Blue"
+
+        android:textColor="@color/white"
+        android:text="Датчики"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvAccelerometerTV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        android:textAlignment="center"
+
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvAccelerometerTV"
         android:layout_width="86dp"
         android:layout_height="27dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="72dp"
         android:gravity="center"
         android:text="@string/accelerometer"
         android:textColor="@color/Blue"

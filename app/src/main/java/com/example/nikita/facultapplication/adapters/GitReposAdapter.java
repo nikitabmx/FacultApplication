@@ -18,9 +18,9 @@ public class GitReposAdapter extends RecyclerView.Adapter<GitReposAdapter.RepoVi
 
     private List<GitHubRepoModel> gitHubRepoList;
 
-//    public GitReposAdapter(List<GitHubRepoModel> gitHubRepoList) {
-//        this.gitHubRepoList = gitHubRepoList;
-//    }
+    public GitReposAdapter(List<GitHubRepoModel> gitHubRepoList) {
+        this.gitHubRepoList = gitHubRepoList;
+    }
 
 
 
@@ -40,7 +40,7 @@ public class GitReposAdapter extends RecyclerView.Adapter<GitReposAdapter.RepoVi
 
     @Override
     public void onBindViewHolder(@NonNull RepoViewHolder repoViewHolder, int i) {
-        repoViewHolder.bind_views(gitHubRepoList.get(i));
+        repoViewHolder.itemRepo_tv.setText(gitHubRepoList.get(i).getName());
     }
 
     @Override
@@ -62,18 +62,18 @@ public class GitReposAdapter extends RecyclerView.Adapter<GitReposAdapter.RepoVi
 
 
     class RepoViewHolder extends RecyclerView.ViewHolder {
+
         TextView itemRepo_tv;
+
+
         public RepoViewHolder(@NonNull View itemView) {
+
             super(itemView);
             itemRepo_tv = itemView.findViewById(R.id.itemRepoName_TV);
 
-        }
-            //заполняем адаптер
-        public void bind_views(GitHubRepoModel git_repos){
-
-            itemRepo_tv.setText(git_repos.getName());
 
         }
+
     }
 
 

@@ -31,7 +31,7 @@ public class ReposFragment extends Fragment {
     //Фрагмент отображения репозиториев  гита
     private GitReposAdapter gitReposAdapter;
 
-    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager linearLayoutManager;
 
     private List<GitHubRepoModel> gitHubRepoList = new ArrayList<>();
 
@@ -53,8 +53,9 @@ public class ReposFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        gitHubReposRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        gitReposAdapter = new GitReposAdapter();
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        gitHubReposRecyclerView.setLayoutManager(linearLayoutManager);
+        gitReposAdapter = new GitReposAdapter(gitHubRepoList);
         gitHubReposRecyclerView.setAdapter(gitReposAdapter);
 
 
@@ -66,7 +67,7 @@ public class ReposFragment extends Fragment {
 
     @Override
     public void onStart() {
-        //loadRepos();
+        loadRepos();
         super.onStart();
 
     }
@@ -81,7 +82,7 @@ public class ReposFragment extends Fragment {
 
 
     void loadRepos() {
-        App.get_serviceGeneraror().getRepos("nikitabmx", new Callback<List<GitHubRepoModel>>() {
+        App.get_serviceGeneraror().getRepos(App.getUsername(), new Callback<List<GitHubRepoModel>>() {
 
 
             @Override

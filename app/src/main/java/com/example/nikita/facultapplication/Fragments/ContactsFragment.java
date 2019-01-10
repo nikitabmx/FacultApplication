@@ -1,116 +1,123 @@
 package com.example.nikita.facultapplication.Fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.SimpleAdapter;
 
 import com.example.nikita.facultapplication.MainActivity;
 import com.example.nikita.facultapplication.R;
-import com.example.nikita.facultapplication.adapters.ContactsAdapter;
-import com.example.nikita.facultapplication.models.ContactsModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 
 public class ContactsFragment extends Fragment {
 
 
-    private static final int PERMISSION_REQUEST_CODE = 1;
-    private RecyclerView recyclerViewContacts;
-    private LinearLayoutManager linearLayoutManager;
-
-    public ContactsFragment(){
-
-    }
+    MainActivity mainActivity;
+    ListView listViewContacts;
+    HashMap<String, String> nameNumberHashMap = new HashMap<>();
+    private static final int PERMISSION_REQUEST_CODE = 123;
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contacts, container, false);
-        recyclerViewContacts = view.findViewById(R.id.recycleViewContacts);
+        View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
+        mainActivity = (MainActivity) getActivity();
+        listViewContacts = rootView.findViewById(R.id.contactsLV);
 
+        return rootView;
+    }
 
-        linearLayoutManager = new LinearLayoutManager(getContext());
-        RecyclerView.LayoutManager layoutManager = linearLayoutManager;
-        recyclerViewContacts.setLayoutManager(layoutManager);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        if (checkPermissions()) {
+            showAllContacts();
+        } else {
+            setPermission();
+        }
+    }
 
-
-        ContactsAdapter contactsAdapter = new ContactsAdapter(getContext(), getContacts());
-
-        recyclerViewContacts.setAdapter(contactsAdapter);
-
-
-
-
-
-        return  view;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        showAllContacts();
     }
 
 
+    private void showAllContacts() {
+        Cursor cursor = mainActivity.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                new String[] {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                        ContactsContract.CommonDataKinds.Phone.NUMBER},
+                null ,
+                null,
+                null);
+        mainActivity.startManagingCursor(cursor);
 
-    private List<ContactsModel> getContacts(){
-
-        List<ContactsModel> list = new ArrayList<>();
 
 
 
-        Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                null, null, null,
-                ContactsContract.Contacts.DISPLAY_NAME );
-        assert cursor != null;
-        cursor.moveToFirst();
+        if (Objects.requireNonNull(cursor).getCount() > 0) {
 
-        while (cursor.moveToFirst()){
+            while (cursor.moveToNext()) { nameNumberHashMap.put(cursor.getString(0), cursor.getString(1)); }
 
-            list.add(new ContactsModel(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+            List<HashMap<String, String>> hashMapList = new ArrayList<>();
+            SimpleAdapter adapter = new SimpleAdapter(
 
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
+                    this.getContext(), hashMapList, R.layout.item_contact,
+                    new String[]{"Name Line", "Number Line"},
+                    new int[]{R.id.itemContactNameTV, R.id.itemContactNumberTV}
 
+                    );
+
+            for (Object o : nameNumberHashMap.entrySet()) {
+                HashMap<String, String> resultHashMap = new HashMap<>();
+                Map.Entry pair = (Map.Entry) o;
+                resultHashMap.put("Name Line", pair.getKey().toString());
+                resultHashMap.put("Number Line", pair.getValue().toString());
+                hashMapList.add(resultHashMap);
+            }
+
+            listViewContacts.setAdapter(adapter);
+        }
+    }
+
+    private boolean checkPermissions() {
+        int res;
+        String[] permissions = new String[] {Manifest.permission.READ_CONTACTS};
+
+        for (String perms : permissions) {
+            res = Objects.requireNonNull(this.getContext()).checkCallingOrSelfPermission(perms);
+            if (res != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
         }
 
-        return null;
+        return true;
     }
 
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//
-//        if (requestCode == 1) {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                // Permission is granted
-//
-//            } else {
-//                Toast.makeText(getActivity(), "Until you grant the permission, we cannot display the " +
-//                        "names", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
+    private void setPermission() {
+        String[] permissions = new String[] {Manifest.permission.READ_CONTACTS};
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+        }
+    }
 
 
 
@@ -118,3 +125,5 @@ public class ContactsFragment extends Fragment {
 
 
 }
+
+

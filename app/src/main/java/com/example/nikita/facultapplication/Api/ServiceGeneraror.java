@@ -1,8 +1,12 @@
 package com.example.nikita.facultapplication.Api;
 
+import android.app.Service;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.example.nikita.facultapplication.models.AccessToken;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
+import com.example.nikita.facultapplication.models.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,7 +26,7 @@ public class ServiceGeneraror {
     private  ServerApi serverApi;
 
 
-   public ServiceGeneraror(String base_url){
+   public ServiceGeneraror(String base_url, final String accessToken){
 
 
 
@@ -34,6 +38,11 @@ public class ServiceGeneraror {
 
                okhttp3.Request.Builder builder = chain.request().newBuilder();
 
+
+
+               if (accessToken != null) {
+                   builder.addHeader("Authorization", "token " + accessToken);
+               }
                return chain.proceed(builder.build());
            }
        }).readTimeout(60, TimeUnit.SECONDS).build();
@@ -61,6 +70,18 @@ public class ServiceGeneraror {
     public void getRepos(String userName, Callback<List<GitHubRepoModel>> callback) {
         serverApi.getReposForUser(userName).enqueue(callback);
    }
+
+    //Отправляем запрос на получение токена
+    public void getToken(String clientId, String clientSecret, String code, Callback<AccessToken> callback) {
+        serverApi.getToken(clientId, clientSecret, code).enqueue(callback);
+    }
+
+
+
+    //Метод получения текущего пользователя по токену
+    public void getCurrentUser(Callback<User> callback) {
+        serverApi.getCurrentUser().enqueue(callback);
+    }
 
 
 

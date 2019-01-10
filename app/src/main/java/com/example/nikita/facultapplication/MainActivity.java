@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        checkPermission();
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -120,10 +117,4 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private  void checkPermission(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS ) != PackageManager.PERMISSION_GRANTED ){
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
-        }
-    }
 }

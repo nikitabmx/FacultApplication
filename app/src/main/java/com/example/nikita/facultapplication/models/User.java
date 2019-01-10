@@ -4,35 +4,25 @@ public class User {
 
 
     private int id;
-    private String email;
-    private String token;
+    private String login;
+    private String name;
 
 
 
-    public int getId(){ return id; }
-
-
-
-    public void setId(int id){
-        this.id = id;
+    public String getLogin() {
+        return login;
     }
 
-
-
-    public String getEmail(){ return email; }
-
-
-
-    public void setEmail(String email){ this.email = email; }
-
-
-
-    public String getToken(){
-        return token;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
+    public String getName() {
+        return name;
+    }
 
-
-    public void setToken(String token){ this.token = token; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }
