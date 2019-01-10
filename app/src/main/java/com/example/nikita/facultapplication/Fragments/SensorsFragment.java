@@ -102,7 +102,7 @@ public class SensorsFragment extends Fragment{
 
         {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-            //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
+
         }
 
 
@@ -204,7 +204,7 @@ public class SensorsFragment extends Fragment{
 
     private boolean checkPermission(){
         int res;
-        String[] permissions = new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        String[] permissions = new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, };
 
         for (String perms : permissions) {
             res = Objects.requireNonNull(this.getContext()).checkCallingOrSelfPermission(perms);
@@ -244,7 +244,10 @@ public class SensorsFragment extends Fragment{
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         dispatchTakePictureIntent();
     }
 

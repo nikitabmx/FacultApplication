@@ -1,8 +1,6 @@
 package com.example.nikita.facultapplication.Api;
 
-import android.app.Service;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.example.nikita.facultapplication.models.AccessToken;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
@@ -22,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGeneraror {
 
-    private static final String BASE_URL = "https://api.github.com/";
+
     private  ServerApi serverApi;
 
 
@@ -71,14 +69,14 @@ public class ServiceGeneraror {
         serverApi.getReposForUser(userName).enqueue(callback);
    }
 
-    //Отправляем запрос на получение токена
+        // получаем токен
     public void getToken(String clientId, String clientSecret, String code, Callback<AccessToken> callback) {
         serverApi.getToken(clientId, clientSecret, code).enqueue(callback);
     }
 
 
 
-    //Метод получения текущего пользователя по токену
+    //Получаем пользователя по токену
     public void getCurrentUser(Callback<User> callback) {
         serverApi.getCurrentUser().enqueue(callback);
     }

@@ -24,8 +24,17 @@ import com.example.nikita.facultapplication.Fragments.ReposFragment;
 import com.example.nikita.facultapplication.Fragments.SensorsFragment;
 import com.yandex.mapkit.MapKitFactory;
 
+import java.util.Objects;
+
+import static java.util.Objects.*;
+
 public class MainActivity extends AppCompatActivity
+
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private static final int PERMISSION_REQUEST_CODE = 123;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,9 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
+        // проверяем все разрешения и даем добро
+        checkPermission();
 
 
 
@@ -115,6 +127,44 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
+    private void allowPermission(){
+
+        String[] permissions = new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_CONTACTS};
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+        }
+
+    }
+
+
+    public void checkPermission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
+                &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+
+        {
+            requestPermissions(new String[]{
+
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_CONTACTS
+
+                    }, 1);
+
+        }
+
+
+    }
 
 
 }
