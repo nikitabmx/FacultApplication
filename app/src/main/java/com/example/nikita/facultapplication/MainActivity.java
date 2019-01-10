@@ -1,8 +1,12 @@
 package com.example.nikita.facultapplication;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
+        checkPermission();
 
 
 
@@ -110,5 +114,16 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+
+
+
+    private  void checkPermission(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS ) != PackageManager.PERMISSION_GRANTED ){
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
+        }
     }
 }

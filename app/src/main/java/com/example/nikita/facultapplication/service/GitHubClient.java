@@ -18,5 +18,5 @@ public interface GitHubClient {
 //    ): Call<AccessToken>
 //
 //    @GET("/users/{user}/repos")
-//    fun reposForUsers(@Path("user")user:String): Call<List<GitHubRepo>>
+//    fun reposForUsers(@Path("user")user:String): Call<List<GitHubRepoModel>>
 }

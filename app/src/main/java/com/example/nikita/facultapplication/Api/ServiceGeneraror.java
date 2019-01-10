@@ -2,7 +2,7 @@ package com.example.nikita.facultapplication.Api;
 
 import android.support.annotation.NonNull;
 
-import com.example.nikita.facultapplication.models.GitHubRepo;
+import com.example.nikita.facultapplication.models.GitHubRepoModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -58,7 +58,7 @@ public class ServiceGeneraror {
 
 
 
-    public void getRepos(String userName, Callback<List<GitHubRepo>> callback) {
+    public void getRepos(String userName, Callback<List<GitHubRepoModel>> callback) {
         serverApi.getReposForUser(userName).enqueue(callback);
    }
 

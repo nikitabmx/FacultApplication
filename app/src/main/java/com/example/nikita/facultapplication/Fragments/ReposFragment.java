@@ -1,7 +1,5 @@
 package com.example.nikita.facultapplication.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,12 +14,10 @@ import android.view.ViewGroup;
 import com.example.nikita.facultapplication.R;
 import com.example.nikita.facultapplication.adapters.GitReposAdapter;
 import com.example.nikita.facultapplication.helpers.App;
-import com.example.nikita.facultapplication.models.GitHubRepo;
+import com.example.nikita.facultapplication.models.GitHubRepoModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,7 +33,7 @@ public class ReposFragment extends Fragment {
 
     private LinearLayoutManager layoutManager;
 
-    private List<GitHubRepo> gitHubRepoList = new ArrayList<>();
+    private List<GitHubRepoModel> gitHubRepoList = new ArrayList<>();
 
     private String LOG = "REPOS_FRAGMENT";
 
@@ -85,11 +81,11 @@ public class ReposFragment extends Fragment {
 
 
     void loadRepos() {
-        App.get_serviceGeneraror().getRepos("nikitabmx", new Callback<List<GitHubRepo>>() {
+        App.get_serviceGeneraror().getRepos("nikitabmx", new Callback<List<GitHubRepoModel>>() {
 
 
             @Override
-            public void onResponse(@NonNull Call<List<GitHubRepo>> call, @NonNull Response<List<GitHubRepo>> response) {
+            public void onResponse(@NonNull Call<List<GitHubRepoModel>> call, @NonNull Response<List<GitHubRepoModel>> response) {
                 if(response.isSuccessful()){
                     gitHubRepoList.clear();
                     assert response.body() != null;
@@ -110,7 +106,7 @@ public class ReposFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<GitHubRepo>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<GitHubRepoModel>> call, Throwable t) {
                 t.printStackTrace();
             }
         });

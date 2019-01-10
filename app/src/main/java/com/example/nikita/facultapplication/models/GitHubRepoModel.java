@@ -1,6 +1,6 @@
 package com.example.nikita.facultapplication.models;
 
-public class GitHubRepo {
+public class GitHubRepoModel {
 
     //Класс который описывает наши гитовские репозитории
 

@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nikita.facultapplication.R;
-import com.example.nikita.facultapplication.models.GitHubRepo;
+import com.example.nikita.facultapplication.models.GitHubRepoModel;
 
 import java.util.List;
 
 public class GitReposAdapter extends RecyclerView.Adapter<GitReposAdapter.RepoViewHolder>{
 
-    private List<GitHubRepo> gitHubRepoList;
+    private List<GitHubRepoModel> gitHubRepoList;
 
-//    public GitReposAdapter(List<GitHubRepo> gitHubRepoList) {
+//    public GitReposAdapter(List<GitHubRepoModel> gitHubRepoList) {
 //        this.gitHubRepoList = gitHubRepoList;
 //    }
 
@@ -69,7 +69,7 @@ public class GitReposAdapter extends RecyclerView.Adapter<GitReposAdapter.RepoVi
 
         }
             //заполняем адаптер
-        public void bind_views(GitHubRepo git_repos){
+        public void bind_views(GitHubRepoModel git_repos){
 
             itemRepo_tv.setText(git_repos.getName());
 
