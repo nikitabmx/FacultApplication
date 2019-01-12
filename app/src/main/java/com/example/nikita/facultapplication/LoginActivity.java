@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nikita.facultapplication.helpers.App;
-import com.example.nikita.facultapplication.models.AccessToken;
+import com.example.nikita.facultapplication.models.Token;
 import com.example.nikita.facultapplication.models.User;
 
 import java.io.IOException;
@@ -34,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Button oauthbutton = findViewById(R.id.oauthbutton);
         Button skipbutton = findViewById(R.id.skipbutton);
-
 
         oauthbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +82,9 @@ public class LoginActivity extends AppCompatActivity {
 
             String code = uri.getQueryParameter("code");
 
-            App.get_serviceGeneraror().getToken(App.getCliendID(), App.getClientSecret(), code, new Callback<AccessToken>() {
+            App.get_serviceGeneraror().getToken(App.getCliendID(), App.getClientSecret(), code, new Callback<Token>() {
                 @Override
-                public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                public void onResponse(Call<Token> call, Response<Token> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(LoginActivity.this, "Токен = " + response.body().getToken(), Toast.LENGTH_LONG).show();
                         App.setAccessToken(response.body().getToken());
@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<AccessToken> call, Throwable t) {
+                public void onFailure(Call<Token> call, Throwable t) {
                     t.printStackTrace();
                 }
             });
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Метод для перехода на след активити - которое головное
+
     private void goMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

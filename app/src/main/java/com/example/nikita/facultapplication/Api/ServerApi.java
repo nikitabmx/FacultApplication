@@ -1,6 +1,6 @@
 package com.example.nikita.facultapplication.Api;
 
-import com.example.nikita.facultapplication.models.AccessToken;
+import com.example.nikita.facultapplication.models.Token;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
 import com.example.nikita.facultapplication.models.User;
 
@@ -21,7 +21,7 @@ public interface ServerApi {
     @POST("login/oauth/access_token")
     @FormUrlEncoded
 
-    Call<AccessToken> getToken(
+    Call<Token> getToken(
             @Field("client_id") String clientId,
             @Field("client_secret") String secret,
             @Field("code") String code

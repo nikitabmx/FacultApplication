@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#e8efee</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="white">#ffff</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#edebeb</color>
     <color name="colorAccent">#D81B60</color>
     <color name="Blue">#4788bd</color>
     <color name="blue_statusbar">#868fc6</color>

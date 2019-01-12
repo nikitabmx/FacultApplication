@@ -2,7 +2,7 @@ package com.example.nikita.facultapplication.Api;
 
 import android.support.annotation.NonNull;
 
-import com.example.nikita.facultapplication.models.AccessToken;
+import com.example.nikita.facultapplication.models.Token;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
 import com.example.nikita.facultapplication.models.User;
 import com.google.gson.Gson;
@@ -36,16 +36,12 @@ public class ServiceGeneraror {
 
                okhttp3.Request.Builder builder = chain.request().newBuilder();
 
-
-
                if (accessToken != null) {
                    builder.addHeader("Authorization", "token " + accessToken);
                }
                return chain.proceed(builder.build());
            }
        }).readTimeout(60, TimeUnit.SECONDS).build();
-
-
 
 
        Gson gson = new GsonBuilder()
@@ -62,15 +58,12 @@ public class ServiceGeneraror {
 
 
 
-
-
-
     public void getRepos(String userName, Callback<List<GitHubRepoModel>> callback) {
         serverApi.getReposForUser(userName).enqueue(callback);
    }
 
         // получаем токен
-    public void getToken(String clientId, String clientSecret, String code, Callback<AccessToken> callback) {
+    public void getToken(String clientId, String clientSecret, String code, Callback<Token> callback) {
         serverApi.getToken(clientId, clientSecret, code).enqueue(callback);
     }
 

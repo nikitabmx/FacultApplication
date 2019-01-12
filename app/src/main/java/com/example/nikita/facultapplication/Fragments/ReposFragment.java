@@ -1,5 +1,6 @@
 package com.example.nikita.facultapplication.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,8 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.nikita.facultapplication.LoginActivity;
 import com.example.nikita.facultapplication.R;
+import com.example.nikita.facultapplication.SplashActivity;
 import com.example.nikita.facultapplication.adapters.GitReposAdapter;
 import com.example.nikita.facultapplication.helpers.App;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
@@ -30,14 +35,13 @@ public class ReposFragment extends Fragment {
 
     //Фрагмент отображения репозиториев  гита
     private GitReposAdapter gitReposAdapter;
-
     private LinearLayoutManager linearLayoutManager;
-
     private List<GitHubRepoModel> gitHubRepoList = new ArrayList<>();
-
     private String LOG = "REPOS_FRAGMENT";
-
     RecyclerView gitHubReposRecyclerView;
+
+    private TextView tvTittleRepo;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,6 +49,7 @@ public class ReposFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_repos, container, false);
         gitHubReposRecyclerView = view.findViewById(R.id.gitHubReposRecyclerView);
+        tvTittleRepo = view.findViewById(R.id.tvTittleRepo);
         return view;
 
     }
@@ -59,10 +64,30 @@ public class ReposFragment extends Fragment {
         gitHubReposRecyclerView.setAdapter(gitReposAdapter);
 
 
+        if (App.getAccessToken() == null){
 
+            tvTittleRepo.setText("Нажмите, чтобы авторизоваться ");
+            tvTittleRepo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }});
+
+        } else {
+
+            tvTittleRepo.setText("Мои репозитории");
+            tvTittleRepo.setClickable(false);
+        }
 
 
     }
+
+
+
+
+
+
 
 
     @Override
@@ -82,8 +107,8 @@ public class ReposFragment extends Fragment {
 
 
     void loadRepos() {
-        App.get_serviceGeneraror().getRepos(App.getUsername(), new Callback<List<GitHubRepoModel>>() {
 
+        App.get_serviceGeneraror().getRepos(App.getUsername(), new Callback<List<GitHubRepoModel>>() {
 
             @Override
             public void onResponse(@NonNull Call<List<GitHubRepoModel>> call, @NonNull Response<List<GitHubRepoModel>> response) {
@@ -92,10 +117,11 @@ public class ReposFragment extends Fragment {
                     assert response.body() != null;
                     gitHubRepoList.addAll(response.body());
                     gitReposAdapter.notifyDataSetChanged();
+
                 } else {
 
-                    Log.d(LOG, "Код ошибки = " + response.code());
                     try {
+                        Toast.makeText(getActivity(), "Нет подключения к интернету, повторите позже" + App.getUsername(),Toast.LENGTH_SHORT).show();
                         Log.d(LOG, "Сообщение ошибки = " + response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();

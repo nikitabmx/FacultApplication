@@ -30,7 +30,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Skip dat" />
+        android:text="@string/skip_oauth" />
 
 
 </LinearLayout>

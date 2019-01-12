@@ -2,7 +2,7 @@ package com.example.nikita.facultapplication.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AccessToken {
+public class Token {
 
 
     @SerializedName("access_token")
