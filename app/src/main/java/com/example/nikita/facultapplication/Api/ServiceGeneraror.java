@@ -57,7 +57,6 @@ public class ServiceGeneraror {
    }
 
 
-
     public void getRepos(String userName, Callback<List<GitHubRepoModel>> callback) {
         serverApi.getReposForUser(userName).enqueue(callback);
    }
@@ -66,8 +65,6 @@ public class ServiceGeneraror {
     public void getToken(String clientId, String clientSecret, String code, Callback<Token> callback) {
         serverApi.getToken(clientId, clientSecret, code).enqueue(callback);
     }
-
-
 
     //Получаем пользователя по токену
     public void getCurrentUser(Callback<User> callback) {

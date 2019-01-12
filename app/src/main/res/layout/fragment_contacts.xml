@@ -9,20 +9,23 @@
 
     <TextView
         android:id="@+id/tvTittleRepo"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-
-        android:background="@color/Blue"
-
-        android:textColor="@color/white"
         android:text="Мои контакты"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
 
-        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:paddingTop="15dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/Blue"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout

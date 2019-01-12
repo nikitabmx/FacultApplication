@@ -26,8 +26,8 @@
 
     <!-- sensors and device info-->
     <string name="about_device">DEVICE INFO</string>
-    <string name="wifiIP">WI-FI ip: </string>
-    <string name="mobileIP">Mobile ip: </string>
+    <string name="adressIP">IP:  </string>
+
     <string name="device_model">Device model: </string>
     <string name="android_version">Android version: </string>
     <string name="accelerometer">Value: </string>
@@ -53,6 +53,7 @@
     <string name="Token">Токен:  </string>
     <string name="no_user_info">Нет данных о пользователе и токене</string>
     <string name="skip_oauth">Пропустить</string>
+    <string name="ram">RAM:</string>
 
 
     <!-- for other -->
