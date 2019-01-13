@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.nikita.facultapplication.LoginActivity;
 import com.example.nikita.facultapplication.R;
-import com.example.nikita.facultapplication.SplashActivity;
 import com.example.nikita.facultapplication.adapters.GitReposAdapter;
 import com.example.nikita.facultapplication.helpers.App;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
@@ -35,7 +34,6 @@ public class ReposFragment extends Fragment {
 
     //Фрагмент отображения репозиториев  гита
     private GitReposAdapter gitReposAdapter;
-    private LinearLayoutManager linearLayoutManager;
     private List<GitHubRepoModel> gitHubRepoList = new ArrayList<>();
     private String LOG = "REPOS_FRAGMENT";
     RecyclerView gitHubReposRecyclerView;
@@ -58,7 +56,7 @@ public class ReposFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         gitHubReposRecyclerView.setLayoutManager(linearLayoutManager);
         gitReposAdapter = new GitReposAdapter(gitHubRepoList);
         gitHubReposRecyclerView.setAdapter(gitReposAdapter);
@@ -122,7 +120,8 @@ public class ReposFragment extends Fragment {
 
                     try {
                         Toast.makeText(getActivity(), "Нет подключения к интернету, повторите позже" + App.getUsername(),Toast.LENGTH_SHORT).show();
-                        Log.d(LOG, "Сообщение ошибки = " + response.errorBody().string());
+                        assert response.errorBody() != null;
+                        Log.d(LOG,  response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -133,7 +132,7 @@ public class ReposFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<GitHubRepoModel>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<GitHubRepoModel>> call, @NonNull Throwable t) {
                 t.printStackTrace();
             }
         });

@@ -42,8 +42,6 @@ import java.util.List;
 public class MapFragment extends Fragment {
 
 
-    private String TAG = "MAPFRAGMENT";
-
     private MapView mapView;
     private MapObjectCollection mapObjects;
 
@@ -190,14 +188,7 @@ public class MapFragment extends Fragment {
     }
 
     private String getVehicleType(Transport transport, HashSet<String> knownVehicleType) {
-        // Линия общественного транспорта может иметь несколько связанных с ней типов транспортных средств
-        //Эти типы транспортных средств сортируются из более конкретных к более распространенным
-        //Ваша заявка не знает список всех типов транспортных средств, которые встречаются в данных
-        //(поскольку этот список расширяется с течением времени), поэтому для получения типа транспортного средства
-        //публичную линию, вы должны переходить от более конкретных к более распространенным
-        //пока вы не получите тип транспортного средства, который вы можете обработать
-        //Некоторые примеры типов транспортных средств:
-        //«автобус», «микроавтобус», «троллейбус», «трамвай», «метро», «железная дорога»
+
         for (String type : transport.getLine().getVehicleTypes()) {
             if (knownVehicleType.contains(type)) {
                 return type;
