@@ -22,14 +22,14 @@ public interface ServerApi {
     @FormUrlEncoded
 
     Call<Token> getToken(
+
             @Field("client_id") String clientId,
             @Field("client_secret") String secret,
             @Field("code") String code
     );
 
 
-
-        //Получаем текующего пользователя по токену
+    // метод получения юзера по токену
     @GET("/user")
     Call<User>getCurrentUser();
 
@@ -37,6 +37,12 @@ public interface ServerApi {
     // и получаем его репозитории
     @GET("/users/{user}/repos")
     Call<List<GitHubRepoModel>>getReposForUser(@Path("user") String user);
+
+    //получаем имя в био
+    @GET("/users/{user}/")
+    Call<User>getUserFullName();
+
+
 
 
 }

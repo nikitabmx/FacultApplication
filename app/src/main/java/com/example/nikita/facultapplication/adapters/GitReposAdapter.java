@@ -1,19 +1,12 @@
 package com.example.nikita.facultapplication.adapters;
-
-
-
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
 import com.example.nikita.facultapplication.R;
 import com.example.nikita.facultapplication.components.RepoViewHolder;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
-
-
 import java.util.List;
 
 public class GitReposAdapter extends RecyclerView.Adapter<RepoViewHolder>{

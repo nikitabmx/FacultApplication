@@ -37,11 +37,13 @@ public class ServiceGeneraror {
                okhttp3.Request.Builder builder = chain.request().newBuilder();
 
                if (accessToken != null) {
+
                    builder.addHeader("Authorization", "token " + accessToken);
-               }
-               return chain.proceed(builder.build());
+
+               } return chain.proceed(builder.build());
            }
        }).readTimeout(60, TimeUnit.SECONDS).build();
+
 
 
        Gson gson = new GsonBuilder()
@@ -56,7 +58,7 @@ public class ServiceGeneraror {
          serverApi = retrofit.create(ServerApi.class);
    }
 
-
+    // получаем репо пользователя
     public void getRepos(String userName, Callback<List<GitHubRepoModel>> callback) {
         serverApi.getReposForUser(userName).enqueue(callback);
    }
@@ -72,5 +74,9 @@ public class ServiceGeneraror {
     }
 
 
+
+    public void getUserFullName(Callback<User> callback){
+       serverApi.getUserFullName();
+    }
 
 }
