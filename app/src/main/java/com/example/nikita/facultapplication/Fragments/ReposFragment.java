@@ -81,13 +81,6 @@ public class ReposFragment extends Fragment {
 
     }
 
-
-
-
-
-
-
-
     @Override
     public void onStart() {
         loadRepos();
@@ -102,12 +95,8 @@ public class ReposFragment extends Fragment {
     }
 
 
-
-
     void loadRepos() {
-
         App.get_serviceGeneraror().getRepos(App.getUsername(), new Callback<List<GitHubRepoModel>>() {
-
             @Override
             public void onResponse(@NonNull Call<List<GitHubRepoModel>> call, @NonNull Response<List<GitHubRepoModel>> response) {
                 if(response.isSuccessful()){
@@ -125,12 +114,8 @@ public class ReposFragment extends Fragment {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
                 }
-
             }
-
             @Override
             public void onFailure(@NonNull Call<List<GitHubRepoModel>> call, @NonNull Throwable t) {
                 t.printStackTrace();

@@ -11,40 +11,25 @@ import com.example.nikita.facultapplication.helpers.App;
 
 public class SplashActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_activity);
-
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 if (App.getAccessToken() != null) {
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finishAffinity();
-
                 } else {
-
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finishAffinity();
                 }
-
             }
         }, 1000);
-
-
-
-
-
-
-
-
-
 
     }
 }

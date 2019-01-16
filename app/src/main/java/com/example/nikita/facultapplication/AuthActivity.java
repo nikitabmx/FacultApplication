@@ -11,6 +11,4 @@ public class AuthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_auth);
     }
 
-
-
 }

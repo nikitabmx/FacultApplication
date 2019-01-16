@@ -49,16 +49,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReposFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_github_repos);
-
-
-
-
         View head = navigationView.getHeaderView(0);
         usernameTV = head.findViewById(R.id.headerFirstTV);
         usernameLabelTV = head.findViewById(R.id.headerSndTV);
@@ -85,15 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-
-
-
-
-
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -122,18 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SensorsFragment()).commit();
 
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
-
-
         return true;
     }
-
-
-
-
 
     public void checkPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
@@ -155,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Manifest.permission.READ_CONTACTS
 
                     }, 1);
-
         }
 
     }
+
 
 
 }

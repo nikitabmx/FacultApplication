@@ -24,9 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private String LOG = "LOGIN_ACTIVITY";
 
 
-
-
-
     //    АВТОРИЗАЦИЯ ГИТ
     private static final String cliendID = "1e37b23b5b996ea9d76d";
     private static final String clientSecret = "44c4cf2c598a6cf0a61d3f472db15205cc2b0fc6";
@@ -38,29 +35,21 @@ public class LoginActivity extends AppCompatActivity {
     String urlRedirectEnd = "&scope=repo&redirect_uri=";
 
 
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
 
+        Button oauthButton = findViewById(R.id.oauthbutton);
+        Button skipButton = findViewById(R.id.skipbutton);
 
-        Button oauthbutton = findViewById(R.id.oauthbutton);
-        Button skipbutton = findViewById(R.id.skipbutton);
 
-
-        oauthbutton.setOnClickListener(new View.OnClickListener() {
+        oauthButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               // отправляемся в браузер покорять Апи гитхаба
+                // отправляемся в браузер покорять Апи гитхаба
                 String urlRedirectFULL = urlRedirectStart + cliendID + urlRedirectEnd + callbackURI;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlRedirectFULL));
                 startActivity(intent);
@@ -68,8 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-        skipbutton.setOnClickListener(new View.OnClickListener() {
+        skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -81,17 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
     }
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -103,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
 
             String code = uri.getQueryParameter("code");
             App.get_serviceGeneraror().getToken(cliendID, clientSecret, code, new Callback<Token>() {
-
 
 
                 @Override
@@ -125,7 +102,9 @@ public class LoginActivity extends AppCompatActivity {
                             assert response.errorBody() != null;
                             Log.d(LOG, "ошибка получения токена " + response.errorBody().string());
 
-                        } catch (IOException e) { e.printStackTrace(); }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
@@ -138,35 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    private void getUserFullName(){
-
-        App.get_serviceGeneraror().getUserFullName(new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-
-            }
-        });
-    }
-
-
-
-
-
-
-
-
     private void getUserName() {
-
-
         App.get_serviceGeneraror().getCurrentUser(new Callback<User>() {
 
             @Override
@@ -188,31 +139,18 @@ public class LoginActivity extends AppCompatActivity {
                         assert response.errorBody() != null;
                         Log.d(LOG, "Ошибка получения имени" + response.errorBody().string());
 
-                    } catch (IOException e) { e.printStackTrace(); } }
-
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
             }
 
             @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) { t.printStackTrace(); }
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                t.printStackTrace();
+            }
 
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

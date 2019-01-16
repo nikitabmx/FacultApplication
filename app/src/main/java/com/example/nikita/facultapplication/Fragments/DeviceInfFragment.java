@@ -35,18 +35,12 @@ public class DeviceInfFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_device_inf, container, false);
-
-
 
         ip_TV = v.findViewById(R.id.adressIpTV);
         device_model_TV = v.findViewById(R.id.tvModel);
         os_Version_TV = v.findViewById(R.id.tvVersion);
         deviceRAM = v.findViewById(R.id.ram);
-
-
-
         return v;
 
     }
@@ -56,12 +50,10 @@ public class DeviceInfFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         ActivityManager.MemoryInfo info = new ActivityManager.MemoryInfo();
         ActivityManager manager = (ActivityManager) Objects.requireNonNull(getActivity()).getSystemService(Context.ACTIVITY_SERVICE);
         assert manager != null;
         manager.getMemoryInfo(info);
-
         float ram = info.totalMem;
         deviceRAM.append(" " + String.format("%1$.2f", ram / 1024 / 1024 / 1024) + "GB");
     }
@@ -69,12 +61,10 @@ public class DeviceInfFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     @Override
     public void onStart() {
-
         super.onStart();
 
         String version = Build.VERSION.RELEASE;
         String modelValue = Build.MODEL;
-
         ip_TV.setText("IP: " + getIpAddress());
         device_model_TV.setText("Model: " + modelValue);
         os_Version_TV.setText("Version: " + version);
@@ -92,19 +82,9 @@ public class DeviceInfFragment extends Fragment {
                     }
                 }
             }
-        } catch (SocketException ex) {
-            ex.printStackTrace();
-        }
+        } catch (SocketException ex) { ex.printStackTrace(); }
 
         return null;
     }
-
-
-
-
-
-
-
-
 }
 

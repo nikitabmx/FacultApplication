@@ -16,12 +16,6 @@ public class App extends Application {
     private static final String BASE_URL = "https://api.github.com/";
     private static String username;
 
-
-
-
-
-
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,20 +26,14 @@ public class App extends Application {
         TransportFactory.initialize(this);
 
         sharPrefs = getSharedPreferences(String.valueOf(R.string.prefs_name), MODE_PRIVATE);
-
-
         //получаем имя пользователя из сохраненных данных на устройстве
         username = sharPrefs.getString(String.valueOf(R.string.username), null);
-
         if (sharPrefs.getString(String.valueOf(R.string.token), null) != null) {
 
             setBaseServiceGenerator();
         } else {
             setAuthServiceGenerator();
         }
-
-
-
     }
 
 
@@ -66,7 +54,6 @@ public class App extends Application {
     public static void setAuthServiceGenerator() {
         serviceGeneraror = new ServiceGeneraror(AUTH_URL, null);
     }
-
 
     public static void setBaseServiceGenerator() {
         serviceGeneraror = new ServiceGeneraror(BASE_URL, getAccessToken());

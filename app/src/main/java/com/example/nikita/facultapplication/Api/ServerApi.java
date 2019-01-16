@@ -38,9 +38,7 @@ public interface ServerApi {
     @GET("/users/{user}/repos")
     Call<List<GitHubRepoModel>>getReposForUser(@Path("user") String user);
 
-    //получаем имя в био
-    @GET("/users/{user}/")
-    Call<User>getUserFullName();
+
 
 
 

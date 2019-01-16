@@ -27,7 +27,6 @@ public class ServiceGeneraror {
    public ServiceGeneraror(String base_url, final String accessToken){
 
 
-
        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
            @NonNull
@@ -74,9 +73,5 @@ public class ServiceGeneraror {
     }
 
 
-
-    public void getUserFullName(Callback<User> callback){
-       serverApi.getUserFullName();
-    }
 
 }

@@ -4,12 +4,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.example.nikita.facultapplication.R;
-import com.example.nikita.facultapplication.components.RepoViewHolder;
 import com.example.nikita.facultapplication.models.GitHubRepoModel;
 import java.util.List;
 
-public class GitReposAdapter extends RecyclerView.Adapter<RepoViewHolder>{
+public class GitReposAdapter extends RecyclerView.Adapter<GitReposAdapter.RepoViewHolder>{
+
+    class RepoViewHolder extends RecyclerView.ViewHolder {
+        private TextView itemRepo_tv;
+        private RepoViewHolder(View itemView) {
+            super(itemView);
+            itemRepo_tv = itemView.findViewById(R.id.itemRepoName_TV);
+        }
+    }
 
     private List<GitHubRepoModel> gitHubRepoList;
 

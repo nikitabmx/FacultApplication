@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
+@SuppressWarnings("ALL")
 public class ContactsFragment extends Fragment {
 
 
@@ -33,13 +34,11 @@ public class ContactsFragment extends Fragment {
     HashMap<String, String> nameNumberHashMap = new HashMap<>();
     private static final int PERMISSION_REQUEST_CODE = 123;
 
-
-
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_contacts, container, false);
+
         mainActivity = (MainActivity) getActivity();
         listViewContacts = rootView.findViewById(R.id.contactsLV);
 
@@ -60,7 +59,6 @@ public class ContactsFragment extends Fragment {
         showAllContacts();
     }
 
-
     private void showAllContacts() {
         Cursor cursor = mainActivity.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 new String[] {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
@@ -69,9 +67,6 @@ public class ContactsFragment extends Fragment {
                 null,
                 null);
         mainActivity.startManagingCursor(cursor);
-
-
-
 
         if (Objects.requireNonNull(cursor).getCount() > 0) {
 
@@ -108,7 +103,6 @@ public class ContactsFragment extends Fragment {
                 return false;
             }
         }
-
         return true;
     }
 
